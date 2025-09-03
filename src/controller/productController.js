@@ -77,6 +77,7 @@ const createProduct = (req, res) => {
 module.exports = {
     getAllProducts,
     getProductsById,
+    getProductByName,
     createProduct
 }
 
