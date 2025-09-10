@@ -46,3 +46,78 @@ let product = [
     }
   ]
   
+  
+  //Função para buscar todos os produtos
+  const findAll = () => {
+    return product;
+  }
+  
+  // Função para buscar um produto por id
+  const findById = (id) => {
+    // pra cada item do meu array product, ele vai receber o id 
+    // e vai fazer a comparação vai percorrer todos os itens
+    // e quando o product.id, for igual a id
+    // retorna o objeto
+    return product.find(product => product.id === id);
+  }
+  // Função para buscar um produto por id
+  const findByName = (nome) => {
+    // pra cada item do meu array product, ele vai receber o id 
+    // e vai fazer a comparação vai percorrer todos os itens
+    // e quando o product.id, for igual a id
+    // retorna o objeto
+    return product.find(product => product.nome === nome);
+  }
+  
+  //Função que adiciona um novo produto 
+  const createWithId = (newProductWithId) => {
+    //ternario 
+    //se product.length for maior que 0, 
+    // diminuindo -1 por conta que começaria no 0 
+    // + 1 para gerar o próximo id sequencial
+    const newId = product.length > 0 ? product[product.length - 1].id + 1 : 1;
+  
+    // Cria um novo objeto de produto
+    // ...newProductWithId (spread operator) copia os dados do novo produto (nome, email)
+    // e adiciona a propriedade 'id' com o valor que calculamos
+    // tudo que veio no ...newProductWithId
+    const productWithId = {id: newId, ...newProductWithId};
+  
+    // Adiciona o produto recém-criado ao nosso array 'product'
+    client.push(productWithId);
+  
+    // Retorna o produto completo que acabamos de adicionar
+    return productWithId;
+  
+   
+  }
+  
+  const createWithName = (newProductWithName) => {
+   //ternario 
+    //se product.length for maior que 0, 
+    // diminuindo -1 por conta que começaria no 0 
+    // + 1 para gerar o próximo id sequencial
+    const newName = product.length > 0 ? product[product.length - 1].nome + 1 : 1;
+  
+    // Cria um novo objeto de produto
+    // ...newProdutoWithId (spread operator) copia os dados do novo produto (nome, email)
+    // e adiciona a propriedade 'id' com o valor que calculamos
+    // tudo que veio no ...newProductWithId
+    const productWithName = {nome: newName, ...newProductWithName};
+  
+    // Adiciona o produto recém-criado ao nosso array 'product'
+    client.push(productWithName);
+  
+    // Retorna o produto completo que acabamos de adicionar
+    return productWithName;
+  }
+  
+  
+  // Exportar as funções
+  module.exports = {
+    findAll,
+    findById,
+    createWithId,
+    createWithName,
+    findByName
+  }

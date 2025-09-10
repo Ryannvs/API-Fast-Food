@@ -10,18 +10,20 @@ const productController = require('../controller/productController');
 //1° rota para obter todos os usuários
 
 //quando ela receber uma requisição para a rota "/" ela executa o user controller.getalluser
-router.get('/', productController.getAllUsers);
+router.get('/', productController.getAllProducts);
 
 
-// //2° Rota para obter dados de um usuario por ID
+// //2° Rota para obter dados de um produto por ID
 // //rota para obter é o id, e chamaria o metodo 
 // rota padrão de usuários porém com ID que você quer consultar
-router.get('/:id', productController.getUserById);
+router.get('/:id', productController.getProductsById);
+
+//3° rota para obter dados de um produto por nome
+router.get('/:nome', productController.getProductByName);
 
 
-
-// //3° rota para criar um novo usuário
-router.post('/', productController.createUser);
+// //4° rota para criar um novo usuário
+router.post('/', productController.createProduct);
 
 // exportanto o router 
 module.exports = router;

@@ -45,3 +45,78 @@ let client = [
     "ativo": false
   }
 ]
+
+//Função para buscar todos os cliente
+const findAll = () => {
+  return client;
+}
+
+// Função para buscar um cliente por id
+const findById = (id) => {
+  // pra cada item do meu array client, ele vai receber o id 
+  // e vai fazer a comparação vai percorrer todos os itens
+  // e quando o client.id, for igual a id
+  // retorna o objeto
+  return client.find(client => client.id === id);
+}
+// Função para buscar um cliente por id
+const findByName = (nome) => {
+  // pra cada item do meu array client, ele vai receber o id 
+  // e vai fazer a comparação vai percorrer todos os itens
+  // e quando o client.id, for igual a id
+  // retorna o objeto
+  return client.find(client => client.nome === nome);
+}
+
+//Função que adiciona um novo cliente 
+const createWithId = (newClientWithId) => {
+  //ternario 
+  //se client.length for maior que 0, 
+  // diminuindo -1 por conta que começaria no 0 
+  // + 1 para gerar o próximo id sequencial
+  const newId = client.length > 0 ? client[client.length - 1].id + 1 : 1;
+
+  // Cria um novo objeto de cliente
+  // ...newClientWithId (spread operator) copia os dados do novo cliente (nome, email)
+  // e adiciona a propriedade 'id' com o valor que calculamos
+  // tudo que veio no ...newClientWithId
+  const clientWithId = {id: newId, ...newClientWithId};
+
+  // Adiciona o cliente recém-criado ao nosso array 'users'
+  client.push(clientWithId);
+
+  // Retorna o cliente completo que acabamos de adicionar
+  return clientWithId;
+
+ 
+}
+
+const createWithName = (newClientWithName) => {
+ //ternario 
+  //se client.length for maior que 0, 
+  // diminuindo -1 por conta que começaria no 0 
+  // + 1 para gerar o próximo id sequencial
+  const newName = client.length > 0 ? client[client.length - 1].nome + 1 : 1;
+
+  // Cria um novo objeto de cliente
+  // ...newClientWithId (spread operator) copia os dados do novo cliente (nome, email)
+  // e adiciona a propriedade 'id' com o valor que calculamos
+  // tudo que veio no ...newClienteWithId
+  const clientWithName = {nome: newName, ...newClientWithName};
+
+  // Adiciona o cliente recém-criado ao nosso array 'client'
+  client.push(clientWithName);
+
+  // Retorna o cliente completo que acabamos de adicionar
+  return clientWithName;
+}
+
+
+// Exportar as funções
+module.exports = {
+  findAll,
+  findById,
+  createWithId,
+  createWithName,
+  findByName
+}
