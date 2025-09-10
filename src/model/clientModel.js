@@ -69,7 +69,7 @@ const findByName = (nome) => {
 }
 
 //Função que adiciona um novo cliente 
-const createWithId = (newClientWithId) => {
+const create = (newClient) => {
   //ternario 
   //se client.length for maior que 0, 
   // diminuindo -1 por conta que começaria no 0 
@@ -80,7 +80,7 @@ const createWithId = (newClientWithId) => {
   // ...newClientWithId (spread operator) copia os dados do novo cliente (nome, email)
   // e adiciona a propriedade 'id' com o valor que calculamos
   // tudo que veio no ...newClientWithId
-  const clientWithId = {id: newId, ...newClientWithId};
+  const clientWithId = {id: newId, ...newClient};
 
   // Adiciona o cliente recém-criado ao nosso array 'users'
   client.push(clientWithId);
@@ -91,25 +91,6 @@ const createWithId = (newClientWithId) => {
  
 }
 
-const createWithName = (newClientWithName) => {
- //ternario 
-  //se client.length for maior que 0, 
-  // diminuindo -1 por conta que começaria no 0 
-  // + 1 para gerar o próximo id sequencial
-  const newName = client.length > 0 ? client[client.length - 1].nome + 1 : 1;
-
-  // Cria um novo objeto de cliente
-  // ...newClientWithId (spread operator) copia os dados do novo cliente (nome, email)
-  // e adiciona a propriedade 'id' com o valor que calculamos
-  // tudo que veio no ...newClienteWithId
-  const clientWithName = {nome: newName, ...newClientWithName};
-
-  // Adiciona o cliente recém-criado ao nosso array 'client'
-  client.push(clientWithName);
-
-  // Retorna o cliente completo que acabamos de adicionar
-  return clientWithName;
-}
 
 //função que altera/atualiza os dados de um cliente existente
 const updateById = (id, newData) => {
@@ -148,8 +129,7 @@ const deleteById = (id) => {
 module.exports = {
   findAll,
   findById,
-  createWithId,
-  createWithName,
+  create,
   findByName,
   updateById,
   deleteById

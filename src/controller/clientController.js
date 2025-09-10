@@ -5,15 +5,15 @@ const clientModel = require('../model/clientModel');
 const createClient = (req, res) => {
     // Pegando os dados que foram enviador pelo Body da requisição
     //Desestruturação, pegando algo estruturado e guardo em variáveis
-    const {name, email, telefone, endereco, dataCadastro} = req.body;
+    const {nome, email, telefone, endereco, dataCadastro} = req.body;
 
     //validar se foram enviados senão retorna mensagem de erro
-    if(!name || !email || !telefone || !endereco || !dataCadastro) {
+    if(!nome || !email || !telefone || !endereco || !dataCadastro) {
         return res.status(400).json({mensagem: "Nome, email, telefone, endereço e data de cadastro são campos obrigatórios!"});
     
     //Se estiver tudo correto, retornará a mensagem 201 que é de sucesso
     } else {
-        const newClient = clientModel.create({name, email, telefone, endereco, dataCadastro});
+        const newClient = clientModel.create({nome, email, telefone, endereco, dataCadastro});
         res.status(201).json(newClient);
     }
 }
@@ -74,8 +74,12 @@ const getClientByName = (req, res) => {
 // atualizar um cliente
 const updateClient = (req, res) => {
 
-    //Tranformando os dados em int e buscando o parametro ID
-    const id = parseInt(req.params.id)
+    // //Tranformando os dados em int e buscando o parametro ID
+    // const id = parseInt(req.params.id)
+
+     //Desestruturação, pegando algo estruturado e guardo em variáveis
+     const {id, nome, email, telefone, endereco, dataCadastro} = req.body;
+
 
     //Chamando a função updateById
     const updatedClient = clientModel.updateById(id, req.body)

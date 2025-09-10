@@ -9,7 +9,7 @@ const productController = require('../controller/productController');
 router.get('/', productController.getAllProducts)
 
 // rota para obter produto por ID
-router.get('/:id', productController.getProductById)
+router.get('/:id', productController.getProductsById)
 
 // rota para obter produto pelo nome
 // necessario o /nome diferente do id acima, porque se não fica ambiguo, por exemplo "1" poderia ser ID ou produto, então precisa diferenciar

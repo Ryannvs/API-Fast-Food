@@ -13,13 +13,13 @@ router.get('/:id', clientController.getClientById)
 
 // rota para obter cliente pelo nome
 // necessario o /nome diferente do id acima, porque se não fica ambiguo, por exemplo "1" poderia ser ID ou cliente, então precisa diferenciar
-router.get('/nome/:nome', clientController.getClientByName)
+router.get('/nome/:name', clientController.getClientByName)
 
 // rota para criar um novo cliente
 router.post('/', clientController.createClient)
 
 // atualizar cliente
-router.put('/:id', clientController.updateClient)
+router.put('/', clientController.updateClient)
 
 // deletar cliente
 router.delete('/:id', clientController.deleteClient)
