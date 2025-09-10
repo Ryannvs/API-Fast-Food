@@ -5,25 +5,24 @@ const router = express.Router();
 
 const clientController = require('../controller/clientController');
 
-//Criando as rotas da nossa API 
+// rota para obter todos os clientes
+router.get('/', clientController.getAllClients)
 
-//1° rota para obter todos os cliente
+// rota para obter cliente por ID
+router.get('/:id', clientController.getClientById)
 
-//quando ela receber uma requisição para a rota "/" ela executa o client controller.getalluser
-router.get('/', clientController.getAllClients);
+// rota para obter cliente pelo nome
+// necessario o /nome diferente do id acima, porque se não fica ambiguo, por exemplo "1" poderia ser ID ou cliente, então precisa diferenciar
+router.get('/nome/:nome', clientController.getClientByName)
 
+// rota para criar um novo cliente
+router.post('/', clientController.createClient)
 
-// //2° Rota para obter dados de um cliente por ID
-// //rota para obter é o id, e chamaria o metodo 
-// rota padrão de clientes porém com ID que você quer consultar
-router.get('/:id', clientController.getClientById);
+// atualizar cliente
+router.put('/:id', clientController.updateClient)
 
-//3° rota para obter dados de um produto por nome
-router.get('/:name', clientController.getClientByName);
-
-
-// //4° rota para criar um novo cliente
-router.post('/', clientController.createClient);
+// deletar cliente
+router.delete('/:id', clientController.deleteClient)
 
 // exportanto o router 
 module.exports = router;

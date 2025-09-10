@@ -111,6 +111,38 @@ let product = [
     // Retorna o produto completo que acabamos de adicionar
     return productWithName;
   }
+
+  //função que altera/atualiza os dados de um produto existente
+const updateById = (id, newData) => {
+
+  // procura o indice (posição) do produto no "array" de produtos que possua o id informado
+  const productIndex = product.findIndex(p => p.id === id)
+
+  // verifica se encontrou o produto
+  if (productIndex >= 0) {
+      // "substitui" o produto mantendo o id original
+      // ...newData copia todas as propriedades do newData
+      product[productIndex] = { id, ...newData }
+
+      // retorna o produto atualizado para o controller
+      return product[productIndex]
+  }
+}
+
+//função que deleta um produto
+const deleteById = (id) => {
+
+  const productIndex = product.findIndex(p => p.id === id)
+
+  if (productIndex >= 0) {
+
+      // splice retorna um array com o elemento removido (1 é a quantidade removido)
+      const removed = product.splice(productIndex, 1)
+
+      // aqui é [0] porque é o primeiro (e unico) elemento removido
+      return removed[0]
+  }
+}
   
   
   // Exportar as funções
@@ -119,5 +151,8 @@ let product = [
     findById,
     createWithId,
     createWithName,
-    findByName
+    findByName,
+    updateById,
+    deleteById
+  
   }

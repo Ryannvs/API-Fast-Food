@@ -111,6 +111,38 @@ const createWithName = (newClientWithName) => {
   return clientWithName;
 }
 
+//função que altera/atualiza os dados de um cliente existente
+const updateById = (id, newData) => {
+
+  // procura o indice (posição) do cliente no "array" de clientes que possua o id informado
+  const clientIndex = client.findIndex(p => p.id === id)
+
+  // verifica se encontrou o cliente
+  if (clientIndex >= 0) {
+      // "substitui" o cliente mantendo o id original
+      // ...newData copia todas as propriedades do newData
+      client[clientIndex] = { id, ...newData }
+
+      // retorna o cliente atualizado para o controller
+      return client[clientIndex]
+  }
+}
+
+//função que deleta um cliente
+const deleteById = (id) => {
+
+  const clientIndex = client.findIndex(p => p.id === id)
+
+  if (clientIndex >= 0) {
+
+      // splice retorna um array com o elemento removido (1 é a quantidade removido)
+      const removed = client.splice(clientIndex, 1)
+
+      // aqui é [0] porque é o primeiro (e unico) elemento removido
+      return removed[0]
+  }
+}
+
 
 // Exportar as funções
 module.exports = {
@@ -118,5 +150,7 @@ module.exports = {
   findById,
   createWithId,
   createWithName,
-  findByName
+  findByName,
+  updateById,
+  deleteById
 }

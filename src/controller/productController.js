@@ -1,6 +1,23 @@
 // controlar o que vai ser feito em uma requisição
 const productModel = require('../model/productModel');
 
+//Método do controlador para criar um novo produto
+const createProduct = (req, res) => {
+    // Pegando os dados que foram enviador pelo Body da requisição
+    //Desestruturação, pegando algo estruturado e guardo em variáveis
+    const {nome, email, descricao, preco, categoria, estoque} = req.body;
+
+    //validar se foram enviados senão retorna mensagem de erro
+    if(!nome || !email || !descricao || !preco || !categoria || !estoque) {
+        return res.status(400).json({mensagem: "Nome, email, descricao, preco, categoria e estoque são campos obrigatórios!"});
+    
+    //Se estiver tudo correto, retornará a mensagem 201 que é de sucesso
+    } else {
+        const newProduct = productModel.create({nome, email, descricao, preco, categoria, estoque});
+        res.status(201).json(newProduct);
+    }
+}
+
 
 //Função que executa o metodo da camada model 
 const getAllProducts = (req, res) => {
@@ -55,20 +72,38 @@ const getProductByName = (req, res) => {
     }
 };
 
-//Método do controlador para criar um novo produto
-const createProduct = (req, res) => {
-    // Pegando os dados que foram enviador pelo Body da requisição
-    //Desestruturação, pegando algo estruturado e guardo em variáveis
-    const {nome, email, descricao, preco, categoria, estoque} = req.body;
 
-    //validar se foram enviados senão retorna mensagem de erro
-    if(!nome || !email || !descricao || !preco || !categoria || !estoque) {
-        return res.status(400).json({mensagem: "Nome, email, descricao, preco, categoria e estoque são campos obrigatórios!"});
-    
-    //Se estiver tudo correto, retornará a mensagem 201 que é de sucesso
+
+// atualizar um produto
+const updateProduct = (req, res) => {
+
+     //Transforma o dado em inteiro e busca pelo parametro Id
+    const id = parseInt(req.params.id)
+
+    //Chamando a função updateById
+    const updatedProduct = productModel.updateById(id, req.body)
+
+    //mensagem de erro
+    if(updatedProduct){
+        res.status(200).json(updatedProduct)
     } else {
-        const newProduct = productModel.create({nome, email, descricao, preco, categoria, estoque});
-        res.status(201).json(newProduct);
+        res.status(404).json({ mensagem: "Produto não encontrado!" })
+    }
+}
+// atualizar um produto
+const deleteProduct = (req, res) => {
+
+    //Transforma o dado em inteiro e busca pelo parametro Id
+    const id = parseInt(req.params.id)
+
+    //Chamando a função deleteById
+    const deletedProduct = productModel.deleteById(id, req.body)
+
+    //mensagem de erro
+    if(deletedProduct){
+        res.status(200).json({mensagem: "Produto deletado com sucesso!"})
+    } else {
+        res.status(404).json({ mensagem: "Produto não encontrado!" })
     }
 }
 
@@ -78,6 +113,8 @@ module.exports = {
     getAllProducts,
     getProductsById,
     getProductByName,
-    createProduct
+    createProduct,
+    updateProduct,
+    deleteProduct
 }
 

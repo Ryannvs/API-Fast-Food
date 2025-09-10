@@ -5,25 +5,24 @@ const router = express.Router();
 
 const productController = require('../controller/productController');
 
-//Criando as rotas da nossa API 
+// rota para obter todos os produtos
+router.get('/', productController.getAllProducts)
 
-//1° rota para obter todos os usuários
+// rota para obter produto por ID
+router.get('/:id', productController.getProductById)
 
-//quando ela receber uma requisição para a rota "/" ela executa o user controller.getalluser
-router.get('/', productController.getAllProducts);
+// rota para obter produto pelo nome
+// necessario o /nome diferente do id acima, porque se não fica ambiguo, por exemplo "1" poderia ser ID ou produto, então precisa diferenciar
+router.get('/nome/:nome', productController.getProductByName)
 
+// rota para criar um novo produto
+router.post('/', productController.createProduct)
 
-// //2° Rota para obter dados de um produto por ID
-// //rota para obter é o id, e chamaria o metodo 
-// rota padrão de usuários porém com ID que você quer consultar
-router.get('/:id', productController.getProductsById);
+// atualizar produto
+router.put('/:id', productController.updateProduct)
 
-//3° rota para obter dados de um produto por nome
-router.get('/:nome', productController.getProductByName);
-
-
-// //4° rota para criar um novo usuário
-router.post('/', productController.createProduct);
+// deletar produto
+router.delete('/:id', productController.deleteProduct)
 
 // exportanto o router 
 module.exports = router;
