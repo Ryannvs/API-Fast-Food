@@ -70,7 +70,7 @@ let product = [
   }
   
   //Função que adiciona um novo produto 
-  const createWithId = (newProductWithId) => {
+  const create = (newProductWithId) => {
     //ternario 
     //se product.length for maior que 0, 
     // diminuindo -1 por conta que começaria no 0 
@@ -91,27 +91,6 @@ let product = [
   
    
   }
-  
-  const createWithName = (newProductWithName) => {
-   //ternario 
-    //se product.length for maior que 0, 
-    // diminuindo -1 por conta que começaria no 0 
-    // + 1 para gerar o próximo id sequencial
-    const newName = product.length > 0 ? product[product.length - 1].nome + 1 : 1;
-  
-    // Cria um novo objeto de produto
-    // ...newProdutoWithId (spread operator) copia os dados do novo produto (nome, email)
-    // e adiciona a propriedade 'id' com o valor que calculamos
-    // tudo que veio no ...newProductWithId
-    const productWithName = {nome: newName, ...newProductWithName};
-  
-    // Adiciona o produto recém-criado ao nosso array 'product'
-    client.push(productWithName);
-  
-    // Retorna o produto completo que acabamos de adicionar
-    return productWithName;
-  }
-
   //função que altera/atualiza os dados de um produto existente
 const updateById = (id, newData) => {
 
@@ -149,8 +128,7 @@ const deleteById = (id) => {
   module.exports = {
     findAll,
     findById,
-    createWithId,
-    createWithName,
+    create,
     findByName,
     updateById,
     deleteById
